@@ -31,8 +31,6 @@ export class ViewExercise extends View {
   lblDuration = $("#lblDuration");
   lblCalories = $("#lblCalories");
 
-  imgGps = $("#icon-gps");
-
   handlePopupNo = () => {
     // Paused
   };
@@ -88,7 +86,7 @@ export class ViewExercise extends View {
     show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
     this.lblStatus.text = "";
-    this.gps.destroy();
+    // this.gps.destroy();
   };
 
   handleButton = (evt) => {
@@ -117,7 +115,7 @@ export class ViewExercise extends View {
 
     this.hrm = new Hrm();
 
-    this.gps = new Gps(this.imgGps, this.handleLocationSuccess.bind(this));
+    this.insert(new Gps(this.handleLocationSuccess.bind(this)));
 
     this.cycle = new Cycle(this.elBoxStats);
 

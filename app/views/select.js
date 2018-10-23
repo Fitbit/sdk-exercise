@@ -13,7 +13,6 @@ export class ViewSelect extends View {
 
   btnStart = $("#btnStart");
   lblTitle = $("#lblTitle");
-  imgGps = $("#icon-gps");
 
   handleStart = () => {
     Application.switchTo("ViewExercise");
@@ -27,7 +26,7 @@ export class ViewSelect extends View {
     show(this.btnStart);
     me.appTimeoutEnabled = false; // Disable timeout
 
-    this.gps = new Gps(this.imgGps);
+    this.insert(new Gps());
 
     this.btnStart.addEventListener("click", this.handleStart);
     document.addEventListener("keypress", this.handleKeypress);
@@ -39,7 +38,7 @@ export class ViewSelect extends View {
 
   onUnmount() {
     hide(this.btnStart);
-    this.gps.destroy();
+    // this.gps.destroy();
     this.btnStart.removeEventListener("click", this.handleStart);
     document.addEventListener("keypress", this.handleKeypress);
   }

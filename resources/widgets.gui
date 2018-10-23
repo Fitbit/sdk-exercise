@@ -42,5 +42,10 @@
     <symbol id="subview-clock">
       <text id="lblClock" />
     </symbol>
+
+    <symbol id="subview-gps">
+      <image id="icon-gps" />
+    </symbol>
+
   </defs>
 </svg>

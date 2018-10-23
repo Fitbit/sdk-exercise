@@ -4,12 +4,19 @@
 import { me } from "appbit";
 import { geolocation } from "geolocation";
 
-export default class Gps {
-  iconGps;
-  constructor(icon, callback) {
-    if (icon) this.iconGps = icon;
-    if (typeof callback === "function") this.callback = callback;
+import { View, $at } from "../modules/view";
 
+const $ = $at("#subview-gps");
+export default class Gps extends View {
+  el = $();
+
+  iconGps = $("#icon-gps");
+
+  constructor(callback) {
+    if (typeof callback === "function") this.callback = callback;
+  }
+
+  onMount() {
     if (me.permissions.granted("access_location")) {
       this.watch();
     } else {
@@ -17,7 +24,7 @@ export default class Gps {
     }
   }
 
-  destroy() {
+  onUnmount() {
     geolocation.clearWatch(this.watchId)
   }
 

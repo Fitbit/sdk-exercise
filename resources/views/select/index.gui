@@ -2,7 +2,7 @@
 <svg id="view-select" display="none">
   <image href="images/bg.png" />
 
-  <image id="icon-gps" />
+  <use id="subview-gps" href="#subview-gps" />
 
   <text id="lblTitle">Exercise Name</text>
 
