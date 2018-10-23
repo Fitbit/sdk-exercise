@@ -26,21 +26,20 @@
     <rect id="touch" width="100%" height="100%" opacity="0" pointer-events="all" />
   </svg>
 
-
-  <use id="btnPause" href="#combo-button-lower-right" display="inline" fill="fb-yellow">
+  <use id="btnFinish" href="#combo-button-upper-right" display="none" fill="fb-green" shortcut="none">
     <set href="combo-button-icon" attributeName="href"
-          to="images/icons/btn_combo_pause_press_p.png" />
+          to="images/icons/btn_combo_flag_p.png" />
     <set href="combo-button-icon-press" attributeName="href"
-          to="images/icons/btn_combo_pause_press_p.png" />
-    <set href="combo-button-stroke" attributeName="display" to="none" />
+          to="images/icons/btn_combo_flag_p.png" />
+    <set href="combo-button-stroke" attributeName="display" to="inline" />
   </use>
 
-  <use id="btnResume" href="#combo-button-lower-right" display="none" fill="fb-yellow">
+  <use id="btnToggle" href="#combo-button-lower-right" display="none" fill="fb-yellow" shortcut="none">
     <set href="combo-button-icon" attributeName="href"
-          to="images/icons/btn_combo_play_press_p.png" />
+          to="images/icons/btn_combo_pause_press_p.png" />
     <set href="combo-button-icon-press" attributeName="href"
-          to="images/icons/btn_combo_play_press_p.png" />
-    <set href="combo-button-stroke" attributeName="display" to="none" />
+          to="images/icons/btn_combo_pause_press_p.png" />
+    <set href="combo-button-stroke" attributeName="display" to="inline" />
   </use>
 
   <use id="popup" href="#modal-popup" />

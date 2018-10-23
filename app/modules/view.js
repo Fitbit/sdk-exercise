@@ -114,7 +114,7 @@ export class View {
 }
 
 const ViewProto = View.prototype;
-ViewProto.onKeyDown = ViewProto.onKeyUp = ViewProto.onMount = ViewProto.onUnmount = ViewProto.onRender = function() {};
+ViewProto.onKeyBack = ViewProto.onKeyDown = ViewProto.onKeyUp = ViewProto.onMount = ViewProto.onUnmount = ViewProto.onRender = function() {};
 
 export class Application extends View {
   setScreen(s) {
@@ -143,17 +143,23 @@ export class Application extends View {
       app.render();
     };
 
-    document.onkeypress = ({ key }) => {
-      if (key === "down") app.onKeyDown();
-      else if (key === "up") app.onKeyUp();
+    document.onkeypress = (evt) => {
+      if (evt.key === "back") app.onKeyBack(evt);
+      else if (evt.key === "down") app.onKeyDown(evt);
+      else if (evt.key === "up") app.onKeyUp(evt);
     };
   }
 
-  onKeyDown() {
-    this.screen.onKeyDown();
+  onKeyBack(evt) {
+    this.screen.onKeyBack(evt);
   }
 
-  onKeyUp() {
-    this.screen.onKeyUp();
+  onKeyDown(evt) {
+    this.screen.onKeyDown(evt);
   }
+
+  onKeyUp(evt) {
+    this.screen.onKeyUp(evt);
+  }
+
 }

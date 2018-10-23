@@ -1,8 +1,9 @@
 #lblClock {
-  x: 8;
-  y: 60;
+  x: 50%;
+  y: 28;
   font-size: 20;
   text-length: 8;
+  text-anchor: middle;
 }
 
 .item text {

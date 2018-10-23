@@ -38,13 +38,13 @@ export default class Popup {
   }
 
   addEvents = () => {
-    this.btnLeft.addEventListener("click", this.handleLeft.bind(this));
-    this.btnRight.addEventListener("click", this.handleRight.bind(this));
+    this.btnLeft.addEventListener("click", this.handleLeft);
+    this.btnRight.addEventListener("click", this.handleRight);
   }
 
   removeEvents = () => {
-    this.btnLeft.removeEventListener("click", this.handleLeft.bind(this));
-    this.btnRight.removeEventListener("click", this.handleRight.bind(this));
+    this.btnLeft.removeEventListener("click", this.handleLeft);
+    this.btnRight.removeEventListener("click", this.handleRight);
   }
 
   applySettings = () => {

@@ -16,7 +16,7 @@ export default class Cycle {
     this.removeEvents();
   }
 
-  handleClick() {
+  next() {
     this.index++;
     if (this.index >= this.items.length) {
       this.index = 0;
@@ -31,10 +31,10 @@ export default class Cycle {
   }
 
   addEvents() {
-    this.touch.addEventListener("click", this.handleClick.bind(this));
+    this.touch.addEventListener("click", this.next.bind(this));
   }
 
   removeEvents() {
-    this.touch.removeEventListener("click", this.handleClick.bind(this));
+    this.touch.removeEventListener("click", this.next.bind(this));
   }
 }

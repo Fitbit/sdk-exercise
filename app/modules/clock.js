@@ -6,6 +6,7 @@ import { zeroPad } from "./utils";
 export default class Clock {
   timeString;
   tickCallback;
+  tickCallbackListener;
 
   handleTick(evt) {
     let today = evt.date;
@@ -19,19 +20,19 @@ export default class Clock {
       hours = zeroPad(hours);
     }
     let mins = zeroPad(today.getMinutes());
-    let secs = zeroPad(today.getSeconds())
 
-    this.timeString = `${hours}:${mins}:${secs}`;
+    this.timeString = `${hours}:${mins}`;
     if (typeof this.tickCallback === "function") this.tickCallback();
   }
 
   constructor(granularity, callback) {
     clock.granularity = granularity;
     if (typeof callback === "function") this.tickCallback = callback;
-    clock.addEventListener("tick", this.handleTick.bind(this));
+    this.tickCallbackListener = this.handleTick.bind(this);
+    clock.addEventListener("tick", this.tickCallbackListener);
   }
 
   destroy() {
-    clock.removeEventListener("tick", this.handleTick.bind(this));
+    clock.removeEventListener("tick", this.tickCallbackListener);
   }
 }

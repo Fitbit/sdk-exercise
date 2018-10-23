@@ -6,7 +6,7 @@
 
   <text id="lblTitle">Exercise Name</text>
 
-  <use id="btnStart" href="#combo-button-lower-right" display="inline" fill="fb-yellow">
+  <use id="btnStart" href="#combo-button-lower-right" display="none" fill="fb-yellow" shortcut="none">
     <set href="combo-button-icon" attributeName="href"
           to="images/icons/btn_combo_play_press_p.png" />
     <set href="combo-button-icon-press" attributeName="href"

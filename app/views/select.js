@@ -1,7 +1,9 @@
 import { me } from "appbit";
+import document from "document";
 
 import * as config from "../config";
 import Gps from "../modules/gps";
+import { show, hide } from "../modules/utils";
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-select");
@@ -17,18 +19,28 @@ export class ViewSelect extends View {
     Application.switchTo("ViewExercise");
   };
 
+  handleKeypress = (evt) => {
+    if (evt.key === "down") this.handleStart();
+  }
+
   onMount() {
+    show(this.btnStart);
     me.appTimeoutEnabled = false; // Disable timeout
 
     this.gps = new Gps(this.imgGps);
 
-    this.lblTitle.text = config.exerciseName;
-    this.btnStart.addEventListener("click", this.handleStart.bind(this));
+    this.btnStart.addEventListener("click", this.handleStart);
+    document.addEventListener("keypress", this.handleKeypress);
   }
 
-  onRender() {}
+  onRender() {
+    this.lblTitle.text = config.exerciseName;
+  }
 
   onUnmount() {
-    this.btnStart.removeEventListener("click", this.handleStart.bind(this));
+    hide(this.btnStart);
+    this.gps.destroy();
+    this.btnStart.removeEventListener("click", this.handleStart);
+    document.addEventListener("keypress", this.handleKeypress);
   }
 }

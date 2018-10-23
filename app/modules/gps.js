@@ -1,22 +1,31 @@
 /*
-  Peek the current location to warmup the GPS.
+  Watch the current location to warmup the GPS.
 */
 import { me } from "appbit";
 import { geolocation } from "geolocation";
 
 export default class Gps {
   iconGps;
-  constructor(icon) {
+  constructor(icon, callback) {
     if (icon) this.iconGps = icon;
+    if (typeof callback === "function") this.callback = callback;
 
     if (me.permissions.granted("access_location")) {
-      geolocation.getCurrentPosition(
-        this.handleSuccess.bind(this),
-        this.handleError.bind(this)
-      );
+      this.watch();
     } else {
       this.gpsBad();
     }
+  }
+
+  destroy() {
+    geolocation.clearWatch(this.watchId)
+  }
+
+  watch() {
+    this.watchId = geolocation.watchPosition(
+      this.handleSuccess.bind(this),
+      this.handleError.bind(this)
+    );
   }
 
   gpsGood() {
@@ -29,6 +38,7 @@ export default class Gps {
 
   handleSuccess(position) {
     this.gpsGood();
+    if (typeof this.callback === "function") this.callback();
     console.log(JSON.stringify(position));
   }
 
