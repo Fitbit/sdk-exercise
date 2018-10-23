@@ -15,6 +15,7 @@ export default class Clock extends View {
 
   constructor(granularity = "seconds") {
     clock.granularity = granularity;
+    super();
   }
 
   onMount() {

@@ -14,6 +14,7 @@ export default class Gps extends View {
 
   constructor(callback) {
     if (typeof callback === "function") this.callback = callback;
+    super();
   }
 
   onMount() {
