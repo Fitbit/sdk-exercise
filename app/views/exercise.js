@@ -148,7 +148,10 @@ export class ViewExercise extends View {
       // DISTANCE METERS - TODO: Format for locale
       this.lblDistance.text = exercise.stats.distance;
 
+      // DURATION - TODO: format for hh:mm:ss
       this.lblDuration.text = exercise.stats.activeTime;
+
+      // CALORIES - TODO: Format for locale
       this.lblCalories.text = formatNumberThousands(exercise.stats.calories);
     }
 
