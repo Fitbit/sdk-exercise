@@ -14,3 +14,11 @@ text {
   height: 32;
   fill: "fb-orange";
 }
+
+#lblClock {
+  x: 50%;
+  y: 28;
+  font-size: 20;
+  text-length: 8;
+  text-anchor: middle;
+}

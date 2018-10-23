@@ -38,5 +38,9 @@
         <set href="#text" attributeName="text-anchor" to="middle" />
       </use>
     </symbol>
+
+    <symbol id="subview-clock">
+      <text id="lblClock" />
+    </symbol>
   </defs>
 </svg>

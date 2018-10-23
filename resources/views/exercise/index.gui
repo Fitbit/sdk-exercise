@@ -3,7 +3,7 @@
 <svg id="view-exercise" display="none">
   <image id="icon-gps" />
 
-  <text id="lblClock" />
+  <use id="subview-clock" href="#subview-clock" />
 
   <svg id="boxStats">
     <svg class="item">

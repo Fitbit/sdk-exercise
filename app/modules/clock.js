@@ -5,35 +5,36 @@ import clock from "clock";
 import { preferences } from "user-settings";
 
 import { zeroPad } from "./utils";
+import { View, $at } from "../modules/view";
 
-export default class Clock {
-  timeString;
-  tickCallback;
-  tickListener;
+const $ = $at("#subview-clock");
+export default class Clock extends View {
+  el = $();
 
-  handleTick(evt) {
-    let today = evt.date;
-    let hours = today.getHours();
+  lblClock = $("#lblClock");
+
+  constructor(granularity = "seconds") {
+    clock.granularity = granularity;
+  }
+
+  onMount() {
+    clock.addEventListener("tick", this.handleTick);
+  }
+
+  handleTick = (evt) => {
+    const today = evt.date;
+    const hours = today.getHours();
     if (preferences.clockDisplay === "12h") {
       hours = hours % 12 || 12; // 12h format
     } else {
       hours = zeroPad(hours); // 24h format
     }
-    let mins = zeroPad(today.getMinutes());
+    const mins = zeroPad(today.getMinutes());
 
-    this.timeString = `${hours}:${mins}`;
-    if (typeof this.tickCallback === "function") this.tickCallback();
+    this.lblClock.text = `${hours}:${mins}`;
   }
 
-  constructor(granularity, callback) {
-    if (!granularity) granularity = "seconds";
-    clock.granularity = granularity;
-    if (typeof callback === "function") this.tickCallback = callback;
-    this.tickListener = this.handleTick.bind(this);
-    clock.addEventListener("tick", this.tickListener);
-  }
-
-  destroy() {
-    clock.removeEventListener("tick", this.tickListener);
+  onUnmount() {
+    clock.removeEventListener("tick", this.handleTick);
   }
 }
