@@ -8,7 +8,6 @@ import { View, $at } from "../modules/view";
 
 let $;
 export default class Gps extends View {
-  //el = $();
 
   constructor(parent, callback) {
     $ = $at(parent);

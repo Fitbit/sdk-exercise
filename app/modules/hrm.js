@@ -4,18 +4,13 @@ import { display } from "display";
 import { HeartRateSensor } from "heart-rate";
 import { user } from "user-profile";
 
-export default class Hrm {
-  bodySensor;
-  hrmSensor;
-  constructor() {
-    if (me.permissions.granted("access_heart_rate")) {
-      this.bodySensor = new BodyPresenceSensor();
-      this.hrmSensor = new HeartRateSensor();
-      this.setupEvents();
-    } else {
-      console.log("Denied Heart Rate or User Profile permissions");
-    }
-  }
+import { View, $at } from "../modules/view";
+
+const $ = $at("#subview-hrm");
+export default class Hrm extends View {
+  el = $();
+
+  label = $("#lblHrm");
 
   eventHandler() {
     if (display.on) {
@@ -43,8 +38,21 @@ export default class Hrm {
     return user.heartRateZone(this.hrmSensor.heartRate || 0);
   }
 
-  destroy() {
-    console.log("destroy hrm")
+  onMount() {
+    if (me.permissions.granted("access_heart_rate")) {
+      this.bodySensor = new BodyPresenceSensor();
+      this.hrmSensor = new HeartRateSensor();
+      this.setupEvents();
+    } else {
+      console.log("Denied Heart Rate or User Profile permissions");
+    }
+  }
+
+  onRender() {
+    this.label.text = this.getBPM() || "--";
+  }
+
+  onUnmount() {
     display.removeEventListener("change", this.eventHandler);
   }
 }

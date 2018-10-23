@@ -47,5 +47,10 @@
       <image id="icon-gps" />
     </symbol>
 
+    <symbol id="subview-hrm">
+      <text id="lblHrm" class="bignumber">--</text>
+      <text class="label">heart rate</text>
+    </symbol>
+
   </defs>
 </svg>

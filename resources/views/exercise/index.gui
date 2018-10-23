@@ -7,8 +7,7 @@
 
   <svg id="boxStats">
     <svg class="item">
-      <text id="lblHrm" class="bignumber">--</text>
-      <text class="label">heart rate</text>
+      <use id="subview-hrm" href="#subview-hrm" />
     </svg>
     <svg class="item" display="none">
       <text id="lblSpeed" class="bignumber">0</text>

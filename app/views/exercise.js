@@ -23,7 +23,6 @@ export class ViewExercise extends View {
   lblStatus = $("#lblStatus");
 
   elBoxStats = $("#boxStats");
-  lblHrm = $("#lblHrm");
   lblSpeed = $("#lblSpeed");
   lblSpeedAvg = $("#lblSpeedAvg");
   lblSpeedMax = $("#lblSpeedMax");
@@ -31,17 +30,17 @@ export class ViewExercise extends View {
   lblDuration = $("#lblDuration");
   lblCalories = $("#lblCalories");
 
-  handlePopupNo = () => {
+  handlePopupNo() {
     // Paused
   };
 
-  handlePopupYes = () => {
+  handlePopupYes() {
     exercise.stop();
     Application.switchTo("ViewEnd");
   };
 
 
-  handleToggle = () => {
+  handleToggle() {
     if (exercise.state === "started") {
       this.handlePause();
     } else {
@@ -49,26 +48,26 @@ export class ViewExercise extends View {
     }
   };
 
-  handlePause = () => {
+  handlePause() {
     exercise.pause();
     this.lblStatus.text = "paused";
     this.setComboIcon(this.btnToggle, config.icons.play);
     show(this.btnFinish);
   };
 
-  handleResume = () => {
+  handleResume() {
     exercise.resume();
     this.lblStatus.text = "";
     this.setComboIcon(this.btnToggle, config.icons.pause);
     hide(this.btnFinish);
   };
 
-  setComboIcon = (combo, icon) => {
+  setComboIcon(combo, icon) {
     combo.getElementById("combo-button-icon").href = icon;
     combo.getElementById("combo-button-icon-press").href = icon;
   }
 
-  handleFinish = () => {
+  handleFinish() {
     let popupSettings = {
       title: "End activity?",
       message: `Are you sure you want to finish this ${
@@ -82,18 +81,18 @@ export class ViewExercise extends View {
     this.popup = new Popup(this.modPopup, popupSettings);
   };
 
-  handleLocationSuccess = () => {
+  handleLocationSuccess() {
     show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
     this.lblStatus.text = "";
     this.gps.callback = undefined;
   };
 
-  handleRefresh = () => {
+  handleRefresh() {
     this.render();
   }
 
-  handleButton = (evt) => {
+  handleButton(evt) {
     evt.preventDefault();
     switch (evt.key) {
       case "back":
@@ -110,30 +109,33 @@ export class ViewExercise extends View {
 
   onMount() {
     hide(this.btnFinish);
-    this.setComboIcon(this.btnToggle, config.icons.pause);
     hide(this.btnToggle);
-
+    this.setComboIcon(this.btnToggle, config.icons.pause);
     this.lblStatus.text = "connecting";
 
-    this.clock = new Clock("seconds", this.handleRefresh);
+    this.clock = new Clock("seconds", this.handleRefresh.bind(this));
     this.insert(this.clock);
 
     this.hrm = new Hrm();
+    this.insert(this.hrm);
 
-    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess);
+    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess.bind(this));
     this.insert(this.gps);
 
     this.cycle = new Cycle(this.elBoxStats);
 
-    this.btnToggle.addEventListener("click", this.handleToggle);
-    this.btnFinish.addEventListener("click", this.handleFinish);
+    this.toggleListener = this.handleToggle.bind(this);
+    this.btnToggle.addEventListener("click", this.toggleListener);
 
-    document.addEventListener("keypress", this.handleButton);
+    this.finishListener = this.handleFinish.bind(this);
+    this.btnFinish.addEventListener("click", this.finishListener);
+
+    this.buttonListener = this.handleButton.bind(this);
+    document.addEventListener("keypress", this.buttonListener);
   }
 
   onRender() {
-    this.lblHrm.text = this.hrm.getBPM() || "--";
-
+    //this.hrm.render();
     if (exercise && exercise.stats) {
       // SPEED METERS/SECOND - TODO: Format for locale
       this.lblSpeed.text = exercise.stats.speed.current;
@@ -153,12 +155,10 @@ export class ViewExercise extends View {
   }
 
   onUnmount() {
-    this.hrm.destroy();
     this.cycle.destroy();
 
-    this.btnToggle.removeEventListener("click", this.handleToggle);
-    this.btnFinish.removeEventListener("click", this.handleFinish);
-
-    document.removeEventListener("keypress", this.handleButton);
+    this.btnToggle.removeEventListener("click", this.toggleListener);
+    this.btnFinish.removeEventListener("click", this.finishListener);
+    document.removeEventListener("keypress", this.buttonListener);
   }
 }
