@@ -1,0 +1,10 @@
+#lblClock {
+  x: 8;
+  y: 60;
+  font-size: 20;
+  text-length: 8;
+}
+
+.item text {
+  font-size: 50;
+}

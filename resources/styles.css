@@ -1,0 +1,16 @@
+text {
+  font-family: System-Regular;
+  font-size: 30;
+  font-weight: bold;
+  text-anchor: start;
+  fill: white;
+}
+
+#icon-gps {
+  href: "images/icons/icn_status_gps.png";
+  x: 8;
+  y: 8;
+  width: 32;
+  height: 32;
+  fill: "fb-orange";
+}

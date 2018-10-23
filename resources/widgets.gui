@@ -1,0 +1,42 @@
+<svg>
+  <defs>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="import" href="/mnt/sysassets/widgets_common.gui" />
+    <link rel="import" href="/mnt/sysassets/widgets/combo_button_widget.gui" />
+    <link rel="import" href="/mnt/sysassets/widgets/baseview_widget.gui" />
+    <link rel="import" href="/mnt/sysassets/widgets/panoramaview_widget.gui" />
+    <link rel="stylesheet" href="/mnt/sysassets/widgets/dynamic_textarea.css" />
+    <link rel="import" href="/mnt/sysassets/widgets/dynamic_textarea.gui" />
+    <link rel="import" href="/mnt/sysassets/widgets/square_button_widget.gui" />
+    <link rel="import" href="/mnt/sysassets/widgets/mixed_text_widget.gui" />
+
+    <symbol id="modal-popup" display="none">
+
+      <!-- Black background -->
+      <rect class="full-size" fill="fb-black" />
+
+      <!-- Title and text -->
+      <use href="#mixed-text-center-mid" class="dialog-mixed-text" fill="fb-white">
+        <set href="#top-padding" attributeName="display" to="none" />
+        <!-- <set href="#header/text" attributeName="text-buffer" to="Ready, Set, Go" /> -->
+        <set href="#header/text" attributeName="text-length" to="50" />
+        <set href="#header/text" attributeName="fill" to="fb-magenta"/>
+        <!-- <set href="#copy/text" attributeName="text-buffer" to="Are you ready to begin working?" /> -->
+        <set href="#copy/text" attributeName="text-length" to="80" />
+        <set href="#bottom-padding" attributeName="display" to="none" />
+      </use>
+
+      <!-- Left button -->
+      <use id="btnLeft" class="dialog-half-button-left" href="#square-button-neutral">
+        <set href="#text" attributeName="text-buffer" to="Later" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+      </use>
+
+      <!-- Right button -->
+      <use id="btnRight" class="dialog-half-button-right" href="#square-button-negative">
+        <set href="#text" attributeName="text-buffer" to="Start" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+      </use>
+    </symbol>
+  </defs>
+</svg>

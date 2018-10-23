@@ -1,0 +1,5 @@
+<svg>
+  <link rel="import" href="views/select/index.gui" />
+  <link rel="import" href="views/exercise/index.gui" />
+  <link rel="import" href="views/end/index.gui" />
+</svg>
