@@ -26,7 +26,7 @@ export class ViewSelect extends View {
     show(this.btnStart);
     me.appTimeoutEnabled = false; // Disable timeout
 
-    this.insert(new Gps());
+    this.insert(new Gps("#subview-gps1"));
 
     this.btnStart.addEventListener("click", this.handleStart);
     document.addEventListener("keypress", this.handleKeypress);
@@ -38,7 +38,6 @@ export class ViewSelect extends View {
 
   onUnmount() {
     hide(this.btnStart);
-    // this.gps.destroy();
     this.btnStart.removeEventListener("click", this.handleStart);
     document.addEventListener("keypress", this.handleKeypress);
   }

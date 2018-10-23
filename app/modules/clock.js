@@ -13,8 +13,9 @@ export default class Clock extends View {
 
   lblClock = $("#lblClock");
 
-  constructor(granularity = "seconds") {
+  constructor(granularity = "seconds", callback) {
     clock.granularity = granularity;
+    if (typeof callback === "function") this.callback = callback;
     super();
   }
 
@@ -33,9 +34,12 @@ export default class Clock extends View {
     const mins = zeroPad(today.getMinutes());
 
     this.lblClock.text = `${hours}:${mins}`;
+
+    if (typeof this.callback === "function") this.callback();
   }
 
   onUnmount() {
     clock.removeEventListener("tick", this.handleTick);
+    this.callback = undefined;
   }
 }

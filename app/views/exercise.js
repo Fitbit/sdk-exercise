@@ -86,8 +86,12 @@ export class ViewExercise extends View {
     show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
     this.lblStatus.text = "";
-    // this.gps.destroy();
+    this.gps.callback = undefined;
   };
+
+  handleRefresh = () => {
+    this.render();
+  }
 
   handleButton = (evt) => {
     evt.preventDefault();
@@ -111,11 +115,13 @@ export class ViewExercise extends View {
 
     this.lblStatus.text = "connecting";
 
-    this.insert(new Clock());
+    this.clock = new Clock("seconds", this.handleRefresh);
+    this.insert(this.clock);
 
     this.hrm = new Hrm();
 
-    this.insert(new Gps(this.handleLocationSuccess.bind(this)));
+    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess);
+    this.insert(this.gps);
 
     this.cycle = new Cycle(this.elBoxStats);
 

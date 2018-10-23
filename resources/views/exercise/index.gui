@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="styles.css" />
 
 <svg id="view-exercise" display="none">
-  <use id="subview-gps" href="#subview-gps" />
+  <use id="subview-gps2" href="#subview-gps" />
 
   <use id="subview-clock" href="#subview-clock" />
 

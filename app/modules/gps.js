@@ -6,13 +6,13 @@ import { geolocation } from "geolocation";
 
 import { View, $at } from "../modules/view";
 
-const $ = $at("#subview-gps");
+let $;
 export default class Gps extends View {
-  el = $();
+  //el = $();
 
-  iconGps = $("#icon-gps");
-
-  constructor(callback) {
+  constructor(parent, callback) {
+    $ = $at(parent);
+    this.iconGps = $("#icon-gps");
     if (typeof callback === "function") this.callback = callback;
     super();
   }
@@ -26,7 +26,7 @@ export default class Gps extends View {
   }
 
   onUnmount() {
-    geolocation.clearWatch(this.watchId)
+    geolocation.clearWatch(this.watchId);
   }
 
   watch() {
@@ -45,13 +45,13 @@ export default class Gps extends View {
   }
 
   handleSuccess(position) {
+    console.log(JSON.stringify(position));
     this.gpsGood();
     if (typeof this.callback === "function") this.callback();
-    console.log(JSON.stringify(position));
   }
 
   handleError(error) {
-    this.gpsBad();
     console.log(JSON.stringify(error));
+    this.gpsBad();
   }
 }
