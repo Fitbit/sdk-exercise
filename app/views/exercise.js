@@ -74,7 +74,7 @@ export class ViewExercise extends View {
 
     this.clock = new Clock("seconds", this.handleClockTick.bind(this));
 
-    this.gps = new Gps(imgGps);
+    this.gps = new Gps(this.imgGps);
 
     this.cycle = new Cycle(this.elBoxStats);
 

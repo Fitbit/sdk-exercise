@@ -20,7 +20,7 @@ export class ViewSelect extends View {
   onMount() {
     me.appTimeoutEnabled = false; // Disable timeout
 
-    this.gps = new Gps(imgGps);
+    this.gps = new Gps(this.imgGps);
 
     this.lblTitle.text = config.exerciseName;
     this.btnStart.addEventListener("click", this.handleStart.bind(this));

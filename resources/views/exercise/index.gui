@@ -21,13 +21,7 @@
       <text id="lblHeartRate">90</text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblSpeed" />
-    </svg>
-    <svg class="item" display="none">
-      <text id="lblHeartRate" />
-    </svg>
-    <svg class="item" display="none">
-      <text id="lblHeartRate" />
+      <text id="lblSpeed">3.4</text>
     </svg>
     <rect id="touch" width="100%" height="100%" opacity="0" pointer-events="all" />
   </svg>
