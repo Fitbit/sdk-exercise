@@ -20,7 +20,6 @@ export class ViewExercise extends View {
   modPopup = $("#popup");
   btnFinish = $("#btnFinish");
   btnToggle = $("#btnToggle");
-  lblClock = $("#lblClock");
   lblStatus = $("#lblStatus");
 
   elBoxStats = $("#boxStats");
@@ -85,10 +84,6 @@ export class ViewExercise extends View {
     this.popup = new Popup(this.modPopup, popupSettings);
   };
 
-  handleClockTick = () => {
-    this.render();
-  };
-
   handleLocationSuccess = () => {
     show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
@@ -97,20 +92,17 @@ export class ViewExercise extends View {
   };
 
   handleButton = (evt) => {
+    evt.preventDefault();
     switch (evt.key) {
       case "back":
-        evt.preventDefault();
         this.cycle.next();
         break;
       case "up":
-        evt.preventDefault();
         this.handleFinish();
         break;
       case "down":
-        evt.preventDefault();
         this.handleToggle();
         break;
-      default:
     }
   }
 
@@ -121,7 +113,7 @@ export class ViewExercise extends View {
 
     this.lblStatus.text = "connecting";
 
-    this.clock = new Clock("seconds", this.handleClockTick);
+    this.insert(new Clock());
 
     this.hrm = new Hrm();
 
@@ -136,7 +128,6 @@ export class ViewExercise extends View {
   }
 
   onRender() {
-    this.lblClock.text = this.clock.timeString || "";
     this.lblHrm.text = this.hrm.getBPM() || "--";
 
     if (exercise && exercise.stats) {
@@ -155,7 +146,6 @@ export class ViewExercise extends View {
   }
 
   onUnmount() {
-    this.clock.destroy();
     this.hrm.destroy();
     this.cycle.destroy();
 

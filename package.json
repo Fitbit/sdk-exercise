@@ -5,7 +5,6 @@
   "license": "UNLICENSED",
   "devDependencies": {
     "@fitbit/sdk": "~2.0.1",
-    "@fitbit/sdk-build-targets": "^1.0.0",
     "@fitbit/sdk-cli": "^1.0.2"
   },
   "fitbit": {
@@ -23,8 +22,7 @@
     ],
     "buildTargets": [
       "higgs",
-      "meson",
-      "gemini"
+      "meson"
     ],
     "i18n": {},
     "enableProposedAPI": true
