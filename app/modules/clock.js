@@ -1,3 +1,6 @@
+/*
+A basic digital clock
+*/
 import clock from "clock";
 import { preferences } from "user-settings";
 
@@ -6,18 +9,15 @@ import { zeroPad } from "./utils";
 export default class Clock {
   timeString;
   tickCallback;
-  tickCallbackListener;
+  tickListener;
 
   handleTick(evt) {
     let today = evt.date;
-
     let hours = today.getHours();
     if (preferences.clockDisplay === "12h") {
-      // 12h format
-      hours = hours % 12 || 12;
+      hours = hours % 12 || 12; // 12h format
     } else {
-      // 24h format
-      hours = zeroPad(hours);
+      hours = zeroPad(hours); // 24h format
     }
     let mins = zeroPad(today.getMinutes());
 
@@ -26,13 +26,14 @@ export default class Clock {
   }
 
   constructor(granularity, callback) {
+    if (!granularity) granularity = "seconds";
     clock.granularity = granularity;
     if (typeof callback === "function") this.tickCallback = callback;
-    this.tickCallbackListener = this.handleTick.bind(this);
-    clock.addEventListener("tick", this.tickCallbackListener);
+    this.tickListener = this.handleTick.bind(this);
+    clock.addEventListener("tick", this.tickListener);
   }
 
   destroy() {
-    clock.removeEventListener("tick", this.tickCallbackListener);
+    clock.removeEventListener("tick", this.tickListener);
   }
 }

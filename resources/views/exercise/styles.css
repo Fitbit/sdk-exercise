@@ -6,6 +6,30 @@
   text-anchor: middle;
 }
 
-.item text {
-  font-size: 50;
+#lblStatus {
+  x: 8;
+  y: 100%-18;
+  text-length: 20;
+}
+
+#boxStats {
+  x: 8;
+  y: 30%;
+  width: 100%-16;
+  height: 160;
+}
+
+.bignumber {
+  font-size: 120;
+  font-family: System-Light;
+  fill: fb-yellow;
+  x: -4;
+  y: 84;
+  text-length: 20;
+}
+
+.label {
+  font-size: 20;
+  fill: fb-yellow;
+  y: $-90;
 }

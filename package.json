@@ -14,7 +14,13 @@
     "appDisplayName": "SDK Exercise",
     "iconFile": "resources/icon.png",
     "wipeColor": "#ffffff",
-    "requestedPermissions": ["access_activity", "access_exercise", "access_heart_rate", "access_location"],
+    "requestedPermissions": [
+      "access_activity",
+      "access_exercise",
+      "access_heart_rate",
+      "access_location",
+      "access_user_profile"
+    ],
     "buildTargets": [
       "higgs",
       "meson",

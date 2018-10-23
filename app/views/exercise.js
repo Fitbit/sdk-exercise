@@ -5,8 +5,9 @@ import Clock from "../modules/clock";
 import * as config from "../config";
 import Cycle from "../modules/cycle";
 import Gps from "../modules/gps";
+import Hrm from "../modules/hrm";
 import Popup from "../modules/popup.js";
-import { show, hide } from "../modules/utils";
+import { show, hide, formatNumberThousands } from "../modules/utils";
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-exercise");
@@ -20,7 +21,17 @@ export class ViewExercise extends View {
   btnFinish = $("#btnFinish");
   btnToggle = $("#btnToggle");
   lblClock = $("#lblClock");
+  lblStatus = $("#lblStatus");
+
   elBoxStats = $("#boxStats");
+  lblHrm = $("#lblHrm");
+  lblSpeed = $("#lblSpeed");
+  lblSpeedAvg = $("#lblSpeedAvg");
+  lblSpeedMax = $("#lblSpeedMax");
+  lblDistance = $("#lblDistance");
+  lblDuration = $("#lblDuration");
+  lblCalories = $("#lblCalories");
+
   imgGps = $("#icon-gps");
 
   handlePopupNo = () => {
@@ -43,12 +54,14 @@ export class ViewExercise extends View {
 
   handlePause = () => {
     exercise.pause();
+    this.lblStatus.text = "paused";
     this.setComboIcon(this.btnToggle, config.icons.play);
     show(this.btnFinish);
   };
 
   handleResume = () => {
     exercise.resume();
+    this.lblStatus.text = "";
     this.setComboIcon(this.btnToggle, config.icons.pause);
     hide(this.btnFinish);
   };
@@ -77,7 +90,9 @@ export class ViewExercise extends View {
   };
 
   handleLocationSuccess = () => {
+    show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
+    this.lblStatus.text = "";
     this.gps.destroy();
   };
 
@@ -102,9 +117,13 @@ export class ViewExercise extends View {
   onMount() {
     hide(this.btnFinish);
     this.setComboIcon(this.btnToggle, config.icons.pause);
-    show(this.btnToggle);
+    hide(this.btnToggle);
+
+    this.lblStatus.text = "connecting";
 
     this.clock = new Clock("seconds", this.handleClockTick);
+
+    this.hrm = new Hrm();
 
     this.gps = new Gps(this.imgGps, this.handleLocationSuccess.bind(this));
 
@@ -118,10 +137,26 @@ export class ViewExercise extends View {
 
   onRender() {
     this.lblClock.text = this.clock.timeString || "";
+    this.lblHrm.text = this.hrm.getBPM() || "--";
+
+    if (exercise && exercise.stats) {
+      // SPEED METERS/SECOND - TODO: Format for locale
+      this.lblSpeed.text = exercise.stats.speed.current;
+      this.lblSpeedAvg.text = exercise.stats.speed.average;
+      this.lblSpeedMax.text = exercise.stats.speed.max;
+
+      // DISTANCE METERS - TODO: Format for locale
+      this.lblDistance.text = exercise.stats.distance;
+
+      this.lblDuration.text = exercise.stats.activeTime;
+      this.lblCalories.text = formatNumberThousands(exercise.stats.calories);
+    }
+
   }
 
   onUnmount() {
     this.clock.destroy();
+    this.hrm.destroy();
     this.cycle.destroy();
 
     this.btnToggle.removeEventListener("click", this.handleToggle);

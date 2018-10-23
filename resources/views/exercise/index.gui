@@ -3,28 +3,41 @@
 <svg id="view-exercise" display="none">
   <image id="icon-gps" />
 
-  <text x="50%" y="50%+15"
-          font-family="System-Regular" fill="white"
-          font-size="30" font-weight="bold"
-          text-anchor="middle">EXERCISE</text>
-          <!--
-          heart-rate: current, max, average, zone
-          speed: current, max, average
-          "paused"
-          finish button (confirm popup)
-          -->
-
   <text id="lblClock" />
 
   <svg id="boxStats">
     <svg class="item">
-      <text id="lblHeartRate">90</text>
+      <text id="lblHrm" class="bignumber">--</text>
+      <text class="label">heart rate</text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblSpeed">3.4</text>
+      <text id="lblSpeed" class="bignumber">0</text>
+      <text class="label">speed</text>
+    </svg>
+    <svg class="item" display="none">
+      <text id="lblSpeedAvg" class="bignumber">0</text>
+      <text class="label">speed avg</text>
+    </svg>
+    <svg class="item" display="none">
+      <text id="lblSpeedMax" class="bignumber">0</text>
+      <text class="label">speed max</text>
+    </svg>
+    <svg class="item" display="none">
+      <text id="lblDistance" class="bignumber">0</text>
+      <text class="label">distance "UNITS"</text>
+    </svg>
+    <svg class="item" display="none">
+      <text id="lblDuration" class="bignumber">0</text>
+      <text class="label">duration</text>
+    </svg>
+    <svg class="item" display="none">
+      <text id="lblCalories" class="bignumber">0</text>
+      <text class="label">calories</text>
     </svg>
     <rect id="touch" width="100%" height="100%" opacity="0" pointer-events="all" />
   </svg>
+
+  <text id="lblStatus" />
 
   <use id="btnFinish" href="#combo-button-upper-right" display="none" fill="fb-green" shortcut="none">
     <set href="combo-button-icon" attributeName="href"
