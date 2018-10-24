@@ -76,9 +76,9 @@ export class ViewExercise extends View {
         config.exerciseName
       } session?`,
       btnLeftLabel: "Cancel",
-      btnLeftCallback: this.handlePopupNo,
+      btnLeftCallback: this.handlePopupNo.bind(this),
       btnRightLabel: "End",
-      btnRightCallback: this.handlePopupYes
+      btnRightCallback: this.handlePopupYes.bind(this)
     };
     this.popup = new Popup("#popup", popupSettings);
     this.insert(this.popup);

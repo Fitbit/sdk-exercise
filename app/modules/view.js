@@ -80,7 +80,6 @@ function unmount(view) {
 
     delete view._subviews;
   }
-
   view.onUnmount();
   show(view, false);
 }

@@ -3,6 +3,15 @@ import { View, $at, $ as x$ } from "../modules/view";
 
 export default class Popup extends View {
 
+  settings = {
+    title: "Default Title",
+    message: "Default question?",
+    btnLeftLabel: "No",
+    btnLeftCallback: undefined,
+    btnRightLabel: "Yes",
+    btnRightCallback: undefined
+  }
+
   constructor(parent, settings) {
     if (!parent) return;
     this.parent = x$(parent);
@@ -18,35 +27,23 @@ export default class Popup extends View {
       this.settings = settings;
     }
 
-    this.render();
-
     super();
   }
 
   onMount() {
     this.addEvents();
-    show(this.parent);
-  }
-
-  onRender() {
     this.lblTitle.text = this.settings.title;
     this.lblMessage.text = this.settings.message;
     this.btnLeft.text = this.settings.btnLeftLabel;
     this.btnRight.text = this.settings.btnRightLabel;
+    show(this.parent);
   }
 
-  onUnMount() {
-    this.removeEvents();
+  onRender() {}
+
+  onUnmount() {
     hide(this.parent);
-  }
-
-  settings = {
-    title: "Default Title",
-    message: "Default question?",
-    btnLeftLabel: "No",
-    btnLeftCallback: undefined,
-    btnRightLabel: "Yes",
-    btnRightCallback: undefined
+    this.removeEvents();
   }
 
   handleButton = (callback) => {
