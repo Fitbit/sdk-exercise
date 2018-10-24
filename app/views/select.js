@@ -2,7 +2,7 @@ import { me } from "appbit";
 import document from "document";
 
 import * as config from "../config";
-import Gps from "../modules/gps";
+import Gps from "../subviews/gps";
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-select");

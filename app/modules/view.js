@@ -75,7 +75,6 @@ function unmount(view) {
   const { _subviews } = view;
   if (_subviews) {
     let i = _subviews.length;
-    //while (i--) unmount(subview);
     while (i--) unmount(_subviews[i]);
 
     delete view._subviews;

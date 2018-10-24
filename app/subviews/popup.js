@@ -1,4 +1,4 @@
-import { show, hide } from "./utils";
+import { show, hide } from "../modules/utils";
 import { View, $at, $ as x$ } from "../modules/view";
 
 export default class Popup extends View {

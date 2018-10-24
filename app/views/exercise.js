@@ -1,12 +1,12 @@
 import document from "document";
 import exercise from "exercise";
 
-import Clock from "../modules/clock";
+import Clock from "../subviews/clock";
 import * as config from "../config";
 import Cycle from "../modules/cycle";
-import Gps from "../modules/gps";
-import Hrm from "../modules/hrm";
-import Popup from "../modules/popup.js";
+import Gps from "../subviews/gps";
+import Hrm from "../subviews/hrm";
+import Popup from "../subviews/popup";
 import { show, hide, formatNumberThousands } from "../modules/utils";
 import { Application, View, $at } from "../modules/view";
 
@@ -29,13 +29,10 @@ export class ViewExercise extends View {
   lblCalories = $("#lblCalories");
 
   handlePopupNo() {
-    // Paused
-    console.log("POPUP NO")
     this.remove(this.popup);
   };
 
   handlePopupYes() {
-    console.log("POPUP YES")
     this.remove(this.popup);
     exercise.stop();
     Application.switchTo("ViewEnd");

@@ -4,7 +4,7 @@ A basic digital clock
 import clock from "clock";
 import { preferences } from "user-settings";
 
-import { zeroPad } from "./utils";
+import { zeroPad } from "../modules/utils";
 import { View, $at } from "../modules/view";
 
 const $ = $at("#subview-clock");
