@@ -54,5 +54,5 @@
     <set href="combo-button-stroke" attributeName="display" to="inline" />
   </use>
 
-  <use id="popup" href="#modal-popup" />
+  <use id="popup" href="#subview-popup" display="none" />
 </svg>

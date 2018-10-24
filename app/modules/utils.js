@@ -21,10 +21,12 @@ export function show(element) {
   element.style.display = "inline";
 }
 
+// String starts with a specific word
 export function startsWith(str, word) {
   return str.lastIndexOf(word, 0) === 0;
 }
 
+// Add commas every 3rd digit
 export function formatNumberThousands(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

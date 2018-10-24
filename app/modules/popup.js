@@ -1,6 +1,44 @@
 import { show, hide } from "./utils";
+import { View, $at, $ as x$ } from "../modules/view";
 
-export default class Popup {
+export default class Popup extends View {
+
+  constructor(parent, settings) {
+    if (!parent) return;
+    this.parent = x$(parent);
+
+    let $ = $at(parent);
+
+    this.lblTitle = $("#header");
+    this.lblMessage = $("#copy");
+    this.btnLeft = $("#btnLeft");
+    this.btnRight = $("#btnRight");
+
+    if (settings) {
+      this.settings = settings;
+    }
+
+    this.render();
+
+    super();
+  }
+
+  onMount() {
+    this.addEvents();
+    show(this.parent);
+  }
+
+  onRender() {
+    this.lblTitle.text = this.settings.title;
+    this.lblMessage.text = this.settings.message;
+    this.btnLeft.text = this.settings.btnLeftLabel;
+    this.btnRight.text = this.settings.btnRightLabel;
+  }
+
+  onUnMount() {
+    this.removeEvents();
+    hide(this.parent);
+  }
 
   settings = {
     title: "Default Title",
@@ -11,22 +49,10 @@ export default class Popup {
     btnRightCallback: undefined
   }
 
-  show = () => {
-    show(this.parent);
-  }
-
-  hide = () => {
-    hide(this.parent);
-  }
-
   handleButton = (callback) => {
     if (typeof callback === "function") {
       callback();
-    } else {
-      this.hide();
     }
-    this.removeEvents();
-    this.hide();
   }
 
   handleLeft = () => {
@@ -47,28 +73,4 @@ export default class Popup {
     this.btnRight.removeEventListener("click", this.handleRight);
   }
 
-  applySettings = () => {
-    this.lblTitle.text = this.settings.title;
-    this.lblMessage.text = this.settings.message;
-    this.btnLeft.text = this.settings.btnLeftLabel;
-    this.btnRight.text = this.settings.btnRightLabel;
-  }
-
-  constructor(element, settings) {
-    if (!element) return;
-
-    this.parent = element;
-    this.lblTitle = this.parent.getElementById("header");
-    this.lblMessage = this.parent.getElementById("copy");
-    this.btnLeft = this.parent.getElementById("#btnLeft");
-    this.btnRight = this.parent.getElementById("#btnRight");
-
-    if (settings) {
-      this.settings = settings;
-    }
-
-    this.applySettings();
-    this.addEvents();
-    this.show();
-  }
 }

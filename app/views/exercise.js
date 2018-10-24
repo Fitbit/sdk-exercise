@@ -15,9 +15,7 @@ const $ = $at("#view-exercise");
 export class ViewExercise extends View {
   el = $();
 
-  popup = undefined;
 
-  modPopup = $("#popup");
   btnFinish = $("#btnFinish");
   btnToggle = $("#btnToggle");
   lblStatus = $("#lblStatus");
@@ -32,9 +30,13 @@ export class ViewExercise extends View {
 
   handlePopupNo() {
     // Paused
+    console.log("POPUP NO")
+    this.remove(this.popup);
   };
 
   handlePopupYes() {
+    console.log("POPUP YES")
+    this.remove(this.popup);
     exercise.stop();
     Application.switchTo("ViewEnd");
   };
@@ -78,7 +80,8 @@ export class ViewExercise extends View {
       btnRightLabel: "End",
       btnRightCallback: this.handlePopupYes
     };
-    this.popup = new Popup(this.modPopup, popupSettings);
+    this.popup = new Popup("#popup", popupSettings);
+    this.insert(this.popup);
   };
 
   handleLocationSuccess() {

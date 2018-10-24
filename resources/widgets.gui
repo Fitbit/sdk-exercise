@@ -10,7 +10,7 @@
     <link rel="import" href="/mnt/sysassets/widgets/square_button_widget.gui" />
     <link rel="import" href="/mnt/sysassets/widgets/mixed_text_widget.gui" />
 
-    <symbol id="modal-popup" display="none">
+    <symbol id="subview-popup">
 
       <!-- Black background -->
       <rect class="full-size" fill="fb-black" />
