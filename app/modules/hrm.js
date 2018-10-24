@@ -17,13 +17,14 @@ export default class Hrm extends View {
       this.bodySensor.start();
       this.hrmSensor.start();
     } else {
-      this.hrmSensor.stop();
-      this.bodySensor.stop();
+      if (this.hrmSensor) this.hrmSensor.stop();
+      if (this.bodySensor) this.bodySensor.stop();
     }
   }
 
   setupEvents() {
-    display.addEventListener("change", this.eventHandler);
+    this.changeListener = this.eventHandler.bind(this);
+    display.addEventListener("change", this.changeListener);
     this.eventHandler();
   }
 
@@ -53,6 +54,6 @@ export default class Hrm extends View {
   }
 
   onUnmount() {
-    display.removeEventListener("change", this.eventHandler);
+    display.removeEventListener("change", this.changeListener);
   }
 }
