@@ -6,11 +6,10 @@ import { geolocation } from "geolocation";
 
 import { View, $at } from "../modules/view";
 
-let $;
 export default class Gps extends View {
 
   constructor(parent, callback) {
-    $ = $at(parent);
+    const $ = $at(parent);
     this.iconGps = $("#icon-gps");
     if (typeof callback === "function") this.callback = callback;
     super();
@@ -26,6 +25,7 @@ export default class Gps extends View {
 
   onUnmount() {
     geolocation.clearWatch(this.watchId);
+    this.callback = undefined;
   }
 
   watch() {
@@ -44,7 +44,6 @@ export default class Gps extends View {
   }
 
   handleSuccess(position) {
-    console.log(JSON.stringify(position));
     this.gpsGood();
     if (typeof this.callback === "function") this.callback();
   }

@@ -15,7 +15,6 @@ const $ = $at("#view-exercise");
 export class ViewExercise extends View {
   el = $();
 
-
   btnFinish = $("#btnFinish");
   btnToggle = $("#btnToggle");
   lblStatus = $("#lblStatus");
@@ -99,10 +98,14 @@ export class ViewExercise extends View {
         this.cycle.next();
         break;
       case "up":
-        this.handleFinish();
+        if (exercise.state === "paused") {
+          this.handleFinish();
+        }
         break;
       case "down":
-        this.handleToggle();
+        if (exercise.state === "started") {
+          this.handleToggle();
+        }
         break;
     }
   }
@@ -113,10 +116,10 @@ export class ViewExercise extends View {
     this.setComboIcon(this.btnToggle, config.icons.pause);
     this.lblStatus.text = "connecting";
 
-    this.clock = new Clock("seconds", this.handleRefresh.bind(this));
+    this.clock = new Clock("#subview-clock", "seconds", this.handleRefresh.bind(this));
     this.insert(this.clock);
 
-    this.hrm = new Hrm();
+    this.hrm = new Hrm("#subview-hrm");
     this.insert(this.hrm);
 
     this.gps = new Gps("#subview-gps2", this.handleLocationSuccess.bind(this));

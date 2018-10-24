@@ -1,3 +1,5 @@
+import Clock from "../subviews/clock";
+
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-end");
@@ -5,7 +7,14 @@ const $ = $at("#view-end");
 export class ViewEnd extends View {
   el = $();
 
-  onMount() {}
+  handleRefresh() {
+    this.render();
+  }
+
+  onMount() {
+    this.clock = new Clock("#subview-clock2", "seconds", this.handleRefresh.bind(this));
+    this.insert(this.clock);
+  }
 
   onRender() {}
 

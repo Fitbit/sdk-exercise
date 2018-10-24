@@ -6,11 +6,13 @@ import { user } from "user-profile";
 
 import { View, $at } from "../modules/view";
 
-const $ = $at("#subview-hrm");
-export default class Hrm extends View {
-  el = $();
 
-  label = $("#lblHrm");
+export default class Hrm extends View {
+
+  constructor(parent) {
+    const $ = $at(parent);
+    this.label = $("#lblHrm");
+  }
 
   eventHandler() {
     if (display.on) {
