@@ -3,7 +3,8 @@ import exercise from "exercise";
 
 import Clock from "../subviews/clock";
 import * as config from "../config";
-import Cycle from "../modules/cycle";
+import Cycle from "../modules/cycle"
+import * as formatter from "../modules/formatter";
 import Gps from "../subviews/gps";
 import Hrm from "../subviews/hrm";
 import Popup from "../subviews/popup";
@@ -21,10 +22,14 @@ export class ViewExercise extends View {
 
   elBoxStats = $("#boxStats");
   lblSpeed = $("#lblSpeed");
+  lblSpeedUnits = $("#lblSpeedUnits");
   lblSpeedAvg = $("#lblSpeedAvg");
+  lblSpeedAvgUnits = $("#lblSpeedAvgUnits");
   lblSpeedMax = $("#lblSpeedMax");
+  lblSpeedMaxUnits = $("#lblSpeedMaxUnits");
   lblDistance = $("#lblDistance");
-  lblDuration = $("#lblDuration");
+  lblDistanceUnits = $("#lblDistanceUnits");
+  lblActiveTime = $("#lblActiveTime");
   lblCalories = $("#lblCalories");
 
   handlePopupNo() {
@@ -138,23 +143,30 @@ export class ViewExercise extends View {
   }
 
   onRender() {
-    //this.hrm.render();
     if (exercise && exercise.stats) {
-      // SPEED METERS/SECOND - TODO: Format for locale
-      this.lblSpeed.text = exercise.stats.speed.current;
-      this.lblSpeedAvg.text = exercise.stats.speed.average;
-      this.lblSpeedMax.text = exercise.stats.speed.max;
 
-      // DISTANCE METERS - TODO: Format for locale
-      this.lblDistance.text = exercise.stats.distance;
+      const speed = formatter.formatSpeed(exercise.stats.speed.current);
+      this.lblSpeed.text = speed.value;
+      this.lblSpeedUnits.text = `speed ${speed.units}`;
 
-      // DURATION - TODO: format for hh:mm:ss
-      this.lblDuration.text = exercise.stats.activeTime;
+      const speedAvg = formatter.formatSpeed(exercise.stats.speed.average);
+      this.lblSpeedAvg.text = speedAvg.value;
+      this.lblSpeedAvgUnits.text = `speed avg ${speedAvg.units}`;
 
-      // CALORIES - TODO: Format for locale
-      this.lblCalories.text = formatNumberThousands(exercise.stats.calories);
+      const speedMax = formatter.formatSpeed(exercise.stats.speed.max);
+      this.lblSpeedMax.text = speedMax.value;
+      this.lblSpeedMaxUnits.text = `speed max ${speedMax.units}`;
+
+      const distance = formatter.formatDistance(exercise.stats.distance);
+      this.lblDistance.text = distance.value;
+      this.lblDistanceUnits.text = `distance ${distance.units}`;
+
+      this.lblActiveTime.text = formatter.formatActiveTime(exercise.stats.activeTime);
+
+      this.lblCalories.text = formatter.formatCalories(exercise.stats.calories);
+
+
     }
-
   }
 
   onUnmount() {

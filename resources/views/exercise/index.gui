@@ -10,24 +10,24 @@
       <use id="subview-hrm" href="#subview-hrm" />
     </svg>
     <svg class="item" display="none">
-      <text id="lblSpeed" class="bignumber">0</text>
-      <text class="label">speed</text>
+      <text id="lblSpeed" class="bignumber">00000</text>
+      <text id="lblSpeedUnits" class="label">speed kph</text>/text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblSpeedAvg" class="bignumber">0</text>
-      <text class="label">speed avg</text>
+      <text id="lblSpeedAvg" class="bignumber">00000</text>
+      <text id="lblSpeedAvgUnits" class="label">speed avg kph</text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblSpeedMax" class="bignumber">0</text>
-      <text class="label">speed max</text>
+      <text id="lblSpeedMax" class="bignumber">00000</text>
+      <text id="lblSpeedMaxUnits" class="label">speed max kph</text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblDistance" class="bignumber">0</text>
-      <text class="label">distance "UNITS"</text>
+      <text id="lblDistance" class="bignumber">00000</text>
+      <text id="lblDistanceUnits" class="label">distance kilometers</text>
     </svg>
     <svg class="item" display="none">
-      <text id="lblDuration" class="bignumber">0</text>
-      <text class="label">duration</text>
+      <text id="lblActiveTime" class="bignumber">00000</text>
+      <text class="label">active time</text>
     </svg>
     <svg class="item" display="none">
       <text id="lblCalories" class="bignumber">0</text>

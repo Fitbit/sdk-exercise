@@ -3,6 +3,7 @@ import document from "document";
 
 import * as config from "../config";
 import Gps from "../subviews/gps";
+import * as numbers from "../modules/formatter";
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-select");
@@ -14,6 +15,7 @@ export class ViewSelect extends View {
     this.gps = new Gps("#subview-gps1");
     this.btnStart = $("#btnStart");
     this.lblTitle = $("#lblTitle");
+
     super();
   }
 
