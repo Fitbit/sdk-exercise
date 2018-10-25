@@ -1,19 +1,16 @@
 <link rel="stylesheet" href="styles.css" />
 <svg id="view-end" display="none">
-  <image href="images/bg.png" />
-
-  <text id="lblTitle">Nice Work!</text>
+  <image href="images/bg.png" opacity=".7" />
 
   <use id="subview-clock2" href="#subview-clock" />
 
+  <text id="lblTitle">Nice Work!</text>
 
-  <!--
-  time
+  <text id="lblActiveTime" class="label" />
+  <text id="lblHeartRateAvg" class="label" />
+  <text id="lblHeartRateMax" class="label" />
+  <text id="lblSpeedAvg" class="label" />
+  <text id="lblSpeedMax" class="label" />
+  <text id="lblDistance" class="label" />
 
-
-  total Active Time
-  avg heart rate
-  max heart rate
-  calories?
-  -->
 </svg>

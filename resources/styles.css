@@ -17,8 +17,8 @@ text {
 
 #lblClock {
   x: 50%;
-  y: 28;
-  font-size: 20;
+  y: 32;
+  font-size: 28;
   text-length: 8;
   text-anchor: middle;
 }
@@ -33,7 +33,15 @@ text {
 }
 
 .label {
-  font-size: 20;
+  font-size: 30;
   fill: fb-yellow;
-  y: $-90;
+  text-length: 66;
+}
+
+.item .label {
+  y: $-80;
+}
+
+#subview-hrm .label {
+  y: $-80;
 }

@@ -1,9 +1,12 @@
 #lblTitle {
   x: 8;
-  y: 38;
+  y: 65;
 }
 
-#subview-clock2 {
 
-  y: 100%-40;
+#view-end .label {
+  font-size: 23;
+  x: 8;
+  y: $+5;
+  fill: #ffffff;
 }
