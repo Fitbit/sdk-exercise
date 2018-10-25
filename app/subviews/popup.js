@@ -2,7 +2,6 @@ import { show, hide } from "../modules/utils";
 import { View, $at, $ as x$ } from "../modules/view";
 
 export default class Popup extends View {
-
   settings = {
     title: "Default Title",
     message: "Default question?",
@@ -10,7 +9,7 @@ export default class Popup extends View {
     btnLeftCallback: undefined,
     btnRightLabel: "Yes",
     btnRightCallback: undefined
-  }
+  };
 
   constructor(parent, settings) {
     if (!parent) return;
@@ -46,28 +45,27 @@ export default class Popup extends View {
     this.removeEvents();
   }
 
-  handleButton = (callback) => {
+  handleButton = callback => {
     if (typeof callback === "function") {
       callback();
     }
-  }
+  };
 
   handleLeft = () => {
     this.handleButton(this.settings.btnLeftCallback);
-  }
+  };
 
   handleRight = () => {
     this.handleButton(this.settings.btnRightCallback);
-  }
+  };
 
   addEvents = () => {
     this.btnLeft.addEventListener("click", this.handleLeft);
     this.btnRight.addEventListener("click", this.handleRight);
-  }
+  };
 
   removeEvents = () => {
     this.btnLeft.removeEventListener("click", this.handleLeft);
     this.btnRight.removeEventListener("click", this.handleRight);
-  }
-
+  };
 }

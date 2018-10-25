@@ -6,9 +6,7 @@ import { user } from "user-profile";
 
 import { View, $at } from "../modules/view";
 
-
 export default class Hrm extends View {
-
   constructor(parent) {
     const $ = $at(parent);
     this.label = $("#lblHrm");

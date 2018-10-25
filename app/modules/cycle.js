@@ -27,7 +27,7 @@ export default class Cycle {
       } else {
         hide(item);
       }
-    })
+    });
   }
 
   addEvents() {

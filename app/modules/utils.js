@@ -8,7 +8,8 @@ export function zeroPad(i) {
 
 // Toggle visibility of an element
 export function toggle(element) {
-  element.style.display = (element.style.display === "inline") ? "none" : "inline";
+  element.style.display =
+    element.style.display === "inline" ? "none" : "inline";
 }
 
 // Hide an element

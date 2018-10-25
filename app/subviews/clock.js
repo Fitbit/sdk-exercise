@@ -8,7 +8,6 @@ import { zeroPad } from "../modules/utils";
 import { View, $at } from "../modules/view";
 
 export default class Clock extends View {
-
   constructor(parent, granularity, callback) {
     const $ = $at(parent);
     this.lblClock = $("#lblClock");
@@ -21,7 +20,7 @@ export default class Clock extends View {
     clock.addEventListener("tick", this.handleTick);
   }
 
-  handleTick = (evt) => {
+  handleTick = evt => {
     const today = evt.date;
     const hours = today.getHours();
     const mins = zeroPad(today.getMinutes());
@@ -33,7 +32,7 @@ export default class Clock extends View {
     }
     this.lblClock.text = `${hours}:${mins}`;
     if (typeof this.callback === "function") this.callback();
-  }
+  };
 
   onUnmount() {
     clock.removeEventListener("tick", this.handleTick);

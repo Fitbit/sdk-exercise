@@ -7,7 +7,6 @@ import { geolocation } from "geolocation";
 import { View, $at } from "../modules/view";
 
 export default class Gps extends View {
-
   constructor(parent, callback) {
     const $ = $at(parent);
     this.iconGps = $("#icon-gps");

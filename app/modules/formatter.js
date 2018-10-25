@@ -1,5 +1,6 @@
-import { zeroPad, formatNumberThousands } from "./utils";
 import { units } from "user-settings";
+
+import { zeroPad, formatNumberThousands } from "./utils";
 
 // Input: Speed, in m/s.
 // Output: Speed per hour, based on user-preference.
@@ -22,7 +23,7 @@ export function formatActiveTime(activeTime) {
   if (minutes > 59) {
     hours = Math.floor(minutes / 60);
     hours = zeroPad(hours);
-    minutes = minutes - (hours * 60);
+    minutes = minutes - hours * 60;
     minutes = zeroPad(minutes);
   }
   seconds = Math.floor(seconds % 60);
@@ -43,12 +44,12 @@ export function formatCalories(calories) {
 function convertMetersToMilesOrKilometers(meters, unitK, unitM) {
   let val = (meters || 0) / 1000;
   let u = unitK;
-  if(units.distance === "us") {
+  if (units.distance === "us") {
     val *= 0.621371;
     u = unitM;
   }
   return {
     value: val.toFixed(2),
     units: u
-  }
+  };
 }

@@ -8,7 +8,7 @@ import * as formatter from "../modules/formatter";
 import Gps from "../subviews/gps";
 import Hrm from "../subviews/hrm";
 import Popup from "../subviews/popup";
-import { show, hide, formatNumberThousands } from "../modules/utils";
+import { show, hide } from "../modules/utils";
 import { Application, View, $at } from "../modules/view";
 
 const $ = $at("#view-exercise");
@@ -41,7 +41,6 @@ export class ViewExercise extends View {
     exercise.stop();
     Application.switchTo("ViewEnd");
   };
-
 
   handleToggle() {
     if (exercise.state === "started") {
@@ -173,8 +172,6 @@ export class ViewExercise extends View {
       this.lblActiveTime.text = formatter.formatActiveTime(exercise.stats.activeTime);
 
       this.lblCalories.text = formatter.formatCalories(exercise.stats.calories);
-
-
     }
   }
 
