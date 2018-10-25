@@ -85,6 +85,11 @@ export class ViewExercise extends View {
     this.insert(this.popup);
   };
 
+  handleCancel() {
+    this.gps.callback = undefined;
+    Application.switchTo("ViewSelect");
+  }
+
   handleLocationSuccess() {
     show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
@@ -100,7 +105,11 @@ export class ViewExercise extends View {
     evt.preventDefault();
     switch (evt.key) {
       case "back":
-        this.cycle.next();
+        if (exercise.state === "stopped") {
+          this.handleCancel();
+        } else {
+          this.cycle.next();
+        }
         break;
       case "up":
         if (exercise.state === "paused") {
