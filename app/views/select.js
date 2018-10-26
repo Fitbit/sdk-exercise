@@ -2,8 +2,8 @@ import { me } from "appbit";
 import document from "document";
 
 import * as config from "../config";
-import Gps from "../subviews/gps";
 import { Application, View, $at } from "../lib/view";
+import GPS from "../subviews/gps";
 
 const $ = $at("#view-select");
 
@@ -11,7 +11,7 @@ export class ViewSelect extends View {
   el = $();
 
   constructor() {
-    this.gps = new Gps("#subview-gps1");
+    this.gps = new GPS("#subview-gps1");
     this.btnStart = $("#btnStart");
     this.lblTitle = $("#lblTitle");
 

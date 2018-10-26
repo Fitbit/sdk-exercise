@@ -6,8 +6,12 @@ import { user } from "user-profile";
 
 import { View, $at } from "../lib/view";
 
-export default class Hrm extends View {
+export default class HRM extends View {
   constructor(parent) {
+    if (!parent) {
+      console.warn("HRM parent element is undefined");
+      return;
+    };
     const $ = $at(parent);
     this.label = $("#lblHrm");
   }
@@ -23,8 +27,7 @@ export default class Hrm extends View {
   }
 
   setupEvents() {
-    this.changeListener = this.eventHandler;
-    display.addEventListener("change", this.changeListener);
+    display.addEventListener("change", this.eventHandler);
     this.eventHandler();
   }
 
@@ -45,7 +48,7 @@ export default class Hrm extends View {
       this.hrmSensor = new HeartRateSensor();
       this.setupEvents();
     } else {
-      console.log("Denied Heart Rate or User Profile permissions");
+      console.warn("Denied Heart Rate or User Profile permissions");
     }
   }
 
@@ -54,7 +57,7 @@ export default class Hrm extends View {
   }
 
   onUnmount() {
-    display.removeEventListener("change", this.changeListener);
+    display.removeEventListener("change", this.eventHandler);
     if (this.hrmSensor) this.hrmSensor.stop();
     if (this.bodySensor) this.bodySensor.stop();
   }

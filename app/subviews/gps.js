@@ -6,11 +6,15 @@ import { geolocation } from "geolocation";
 
 import { View, $at } from "../lib/view";
 
-export default class Gps extends View {
+export default class GPS extends View {
   constructor(parent, callback) {
+    if (!parent) {
+      console.warn("GPS parent element is undefined");
+      return;
+    };
     const $ = $at(parent);
     this.iconGps = $("#icon-gps");
-    if (typeof callback === "function") this.callback = callback;
+    this.callback = callback;
     super();
   }
 
@@ -23,8 +27,10 @@ export default class Gps extends View {
   }
 
   onUnmount() {
-    geolocation.clearWatch(this.watchId);
-    this.callback = undefined;
+    if (this.watchId) {
+      geolocation.clearWatch(this.watchId);
+      this.watchId = undefined;
+    }
   }
 
   watch() {
@@ -48,7 +54,7 @@ export default class Gps extends View {
   }
 
   handleError = (error) => {
-    console.log(JSON.stringify(error));
+    console.error(JSON.stringify(error));
     this.gpsBad();
   }
 }

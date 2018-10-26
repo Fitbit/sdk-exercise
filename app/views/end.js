@@ -1,8 +1,8 @@
 import exercise from "exercise";
 
-import Clock from "../subviews/clock";
 import * as utils from "../lib/utils";
 import { View, $at } from "../lib/view";
+import Clock from "../subviews/clock";
 
 const $ = $at("#view-end");
 

@@ -4,16 +4,15 @@ export default class Cycle {
   index = 0;
 
   constructor(container) {
-    if (!container) return;
+    if (!container) {
+      console.warn("Cycle parent element is undefined");
+      return;
+    };
 
     this.container = container;
     this.items = this.container.getElementsByClassName("item");
     this.touch = this.container.getElementById("touch");
     this.addEvents();
-  }
-
-  destroy() {
-    this.removeEvents();
   }
 
   next = () => {

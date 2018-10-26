@@ -1,14 +1,14 @@
 import document from "document";
 import exercise from "exercise";
 
-import Clock from "../subviews/clock";
 import * as config from "../config";
 import Cycle from "../lib/cycle"
-import Gps from "../subviews/gps";
-import Hrm from "../subviews/hrm";
-import Popup from "../subviews/popup";
-import * as utils from "../lib/utils";
 import { Application, View, $at } from "../lib/view";
+import * as utils from "../lib/utils";
+import Clock from "../subviews/clock";
+import GPS from "../subviews/gps";
+import HRM from "../subviews/hrm";
+import Popup from "../subviews/popup";
 
 const $ = $at("#view-exercise");
 
@@ -131,22 +131,17 @@ export class ViewExercise extends View {
     this.clock = new Clock("#subview-clock", "seconds", this.handleRefresh);
     this.insert(this.clock);
 
-    this.hrm = new Hrm("#subview-hrm");
+    this.hrm = new HRM("#subview-hrm");
     this.insert(this.hrm);
 
-    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess);
+    this.gps = new GPS("#subview-gps2", this.handleLocationSuccess);
     this.insert(this.gps);
 
     this.cycle = new Cycle(this.elBoxStats);
 
-    this.toggleListener = this.handleToggle;
-    this.btnToggle.addEventListener("click", this.toggleListener);
-
-    this.finishListener = this.handleFinish;
-    this.btnFinish.addEventListener("click", this.finishListener);
-
-    this.buttonListener = this.handleButton;
-    document.addEventListener("keypress", this.buttonListener);
+    this.btnToggle.addEventListener("click", this.handleToggle);
+    this.btnFinish.addEventListener("click", this.handleFinish);
+    document.addEventListener("keypress", this.handleButton);
   }
 
   onRender() {
@@ -175,10 +170,10 @@ export class ViewExercise extends View {
   }
 
   onUnmount() {
-    this.cycle.destroy();
+    this.cycle.removeEvents();
 
-    this.btnToggle.removeEventListener("click", this.toggleListener);
-    this.btnFinish.removeEventListener("click", this.finishListener);
-    document.removeEventListener("keypress", this.buttonListener);
+    this.btnToggle.removeEventListener("click", this.handleToggle);
+    this.btnFinish.removeEventListener("click", this.handleFinish);
+    document.removeEventListener("keypress", this.handleButton);
   }
 }

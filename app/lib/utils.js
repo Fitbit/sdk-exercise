@@ -42,14 +42,6 @@ export function startsWith(str, word) {
   return str.lastIndexOf(word, 0) === 0;
 }
 
-/** @description Add commas every 3rd digit.
- * @param {number} num The number to format.
- * @return {string}
- */
-export function formatNumberThousands(num) {
-  return num.toLocaleString();
-}
-
 /** @description Formats speed per second, into speed per hour. Returns an
  * object containing a value and units.
  * @param {number} speed The Speed, in meters per second.
@@ -95,7 +87,7 @@ export function formatActiveTime(activeTime) {
  * @return {string}
  */
 export function formatCalories(calories) {
-  return formatNumberThousands(calories);
+  return calories.toLocaleString();
 }
 
 // Convert meters into the user preference for kilometers or miles.

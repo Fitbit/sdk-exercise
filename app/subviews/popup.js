@@ -2,18 +2,11 @@ import { show, hide } from "../lib/utils";
 import { View, $at, $ as x$ } from "../lib/view";
 
 export default class Popup extends View {
-
-  defaults = {
-    title: "Default Title",
-    message: "Default question?",
-    btnLeftLabel: "No",
-    btnLeftCallback: undefined,
-    btnRightLabel: "Yes",
-    btnRightCallback: undefined
-  };
-
   constructor(parent, settings = {}) {
-    if (!parent) return;
+    if (!parent) {
+      console.warn("Popup parent element is undefined");
+      return;
+    }
     this.parent = x$(parent);
 
     const $ = $at(parent);
@@ -23,7 +16,17 @@ export default class Popup extends View {
     this.btnLeft = $("#btnLeft");
     this.btnRight = $("#btnRight");
 
-    this.settings = { ...this.defaults, ...settings };
+    this.settings = {
+      ...{
+        title: "Default Title",
+        message: "Default question?",
+        btnLeftLabel: "No",
+        btnLeftCallback: undefined,
+        btnRightLabel: "Yes",
+        btnRightCallback: undefined
+      },
+      ...settings
+    };
 
     super();
   }
@@ -44,7 +47,7 @@ export default class Popup extends View {
     this.removeEvents();
   }
 
-  handleButton = (callback) => {
+  handleButton = callback => {
     if (typeof callback === "function") callback();
   };
 
