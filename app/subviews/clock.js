@@ -4,15 +4,15 @@ A basic digital clock
 import clock from "clock";
 import { preferences } from "user-settings";
 
-import { zeroPad } from "../modules/utils";
-import { View, $at } from "../modules/view";
+import { zeroPad } from "../lib/utils";
+import { View, $at } from "../lib/view";
 
 export default class Clock extends View {
   constructor(parent, granularity, callback) {
     const $ = $at(parent);
     this.lblClock = $("#lblClock");
-    clock.granularity = granularity;
-    if (typeof callback === "function") this.callback = callback;
+    clock.granularity = granularity || "seconds";
+    this.callback = callback;
     super();
   }
 
@@ -20,7 +20,7 @@ export default class Clock extends View {
     clock.addEventListener("tick", this.handleTick);
   }
 
-  handleTick = evt => {
+  handleTick = (evt) => {
     const today = evt.date;
     const hours = today.getHours();
     const mins = zeroPad(today.getMinutes());
@@ -36,6 +36,5 @@ export default class Clock extends View {
 
   onUnmount() {
     clock.removeEventListener("tick", this.handleTick);
-    this.callback = undefined;
   }
 }

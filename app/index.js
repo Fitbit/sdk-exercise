@@ -1,4 +1,4 @@
-import { Application } from "./modules/view";
+import { Application } from "./lib/view";
 
 import { ViewSelect } from "./views/select";
 import { ViewExercise } from "./views/exercise";

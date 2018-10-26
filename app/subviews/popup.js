@@ -1,8 +1,9 @@
-import { show, hide } from "../modules/utils";
-import { View, $at, $ as x$ } from "../modules/view";
+import { show, hide } from "../lib/utils";
+import { View, $at, $ as x$ } from "../lib/view";
 
 export default class Popup extends View {
-  settings = {
+
+  defaults = {
     title: "Default Title",
     message: "Default question?",
     btnLeftLabel: "No",
@@ -11,20 +12,18 @@ export default class Popup extends View {
     btnRightCallback: undefined
   };
 
-  constructor(parent, settings) {
+  constructor(parent, settings = {}) {
     if (!parent) return;
     this.parent = x$(parent);
 
-    let $ = $at(parent);
+    const $ = $at(parent);
 
     this.lblTitle = $("#header");
     this.lblMessage = $("#copy");
     this.btnLeft = $("#btnLeft");
     this.btnRight = $("#btnRight");
 
-    if (settings) {
-      this.settings = settings;
-    }
+    this.settings = { ...this.defaults, ...settings };
 
     super();
   }
@@ -45,10 +44,8 @@ export default class Popup extends View {
     this.removeEvents();
   }
 
-  handleButton = callback => {
-    if (typeof callback === "function") {
-      callback();
-    }
+  handleButton = (callback) => {
+    if (typeof callback === "function") callback();
   };
 
   handleLeft = () => {

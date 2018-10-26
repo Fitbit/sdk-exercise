@@ -3,7 +3,7 @@ import document from "document";
 
 import * as config from "../config";
 import Gps from "../subviews/gps";
-import { Application, View, $at } from "../modules/view";
+import { Application, View, $at } from "../lib/view";
 
 const $ = $at("#view-select");
 
@@ -18,11 +18,11 @@ export class ViewSelect extends View {
     super();
   }
 
-  handleStart() {
+  handleStart = () => {
     Application.switchTo("ViewExercise");
   }
 
-  handleKeypress(evt) {
+  handleKeypress = (evt) => {
     if (evt.key === "down") this.handleStart();
   }
 

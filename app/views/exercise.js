@@ -3,13 +3,12 @@ import exercise from "exercise";
 
 import Clock from "../subviews/clock";
 import * as config from "../config";
-import Cycle from "../modules/cycle"
-import * as formatter from "../modules/formatter";
+import Cycle from "../lib/cycle"
 import Gps from "../subviews/gps";
 import Hrm from "../subviews/hrm";
 import Popup from "../subviews/popup";
-import { show, hide } from "../modules/utils";
-import { Application, View, $at } from "../modules/view";
+import * as utils from "../lib/utils";
+import { Application, View, $at } from "../lib/view";
 
 const $ = $at("#view-exercise");
 
@@ -32,17 +31,17 @@ export class ViewExercise extends View {
   lblActiveTime = $("#lblActiveTime");
   lblCalories = $("#lblCalories");
 
-  handlePopupNo() {
+  handlePopupNo = () => {
     this.remove(this.popup);
   };
 
-  handlePopupYes() {
+  handlePopupYes = () => {
     this.remove(this.popup);
     exercise.stop();
     Application.switchTo("ViewEnd");
   };
 
-  handleToggle() {
+  handleToggle = () => {
     if (exercise.state === "started") {
       this.handlePause();
     } else {
@@ -50,18 +49,18 @@ export class ViewExercise extends View {
     }
   };
 
-  handlePause() {
+  handlePause = () => {
     exercise.pause();
     this.lblStatus.text = "paused";
     this.setComboIcon(this.btnToggle, config.icons.play);
-    show(this.btnFinish);
+    utils.show(this.btnFinish);
   };
 
-  handleResume() {
+  handleResume = () => {
     exercise.resume();
     this.lblStatus.text = "";
     this.setComboIcon(this.btnToggle, config.icons.pause);
-    hide(this.btnFinish);
+    utils.hide(this.btnFinish);
   };
 
   setComboIcon(combo, icon) {
@@ -69,38 +68,38 @@ export class ViewExercise extends View {
     combo.getElementById("combo-button-icon-press").href = icon;
   }
 
-  handleFinish() {
+  handleFinish = () => {
     let popupSettings = {
       title: "End activity?",
       message: `Are you sure you want to finish this ${
         config.exerciseName
       } session?`,
       btnLeftLabel: "Cancel",
-      btnLeftCallback: this.handlePopupNo.bind(this),
+      btnLeftCallback: this.handlePopupNo,
       btnRightLabel: "End",
-      btnRightCallback: this.handlePopupYes.bind(this)
+      btnRightCallback: this.handlePopupYes
     };
     this.popup = new Popup("#popup", popupSettings);
     this.insert(this.popup);
   };
 
-  handleCancel() {
+  handleCancel = () => {
     this.gps.callback = undefined;
     Application.switchTo("ViewSelect");
   }
 
-  handleLocationSuccess() {
-    show(this.btnToggle);
+  handleLocationSuccess = () => {
+    utils.show(this.btnToggle);
     exercise.start(config.exerciseName, config.exerciseOptions);
     this.lblStatus.text = "";
     this.gps.callback = undefined;
   };
 
-  handleRefresh() {
+  handleRefresh = () => {
     this.render();
   }
 
-  handleButton(evt) {
+  handleButton = (evt) => {
     evt.preventDefault();
     switch (evt.key) {
       case "back":
@@ -124,54 +123,54 @@ export class ViewExercise extends View {
   }
 
   onMount() {
-    hide(this.btnFinish);
-    hide(this.btnToggle);
+    utils.hide(this.btnFinish);
+    utils.hide(this.btnToggle);
     this.setComboIcon(this.btnToggle, config.icons.pause);
     this.lblStatus.text = "connecting";
 
-    this.clock = new Clock("#subview-clock", "seconds", this.handleRefresh.bind(this));
+    this.clock = new Clock("#subview-clock", "seconds", this.handleRefresh);
     this.insert(this.clock);
 
     this.hrm = new Hrm("#subview-hrm");
     this.insert(this.hrm);
 
-    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess.bind(this));
+    this.gps = new Gps("#subview-gps2", this.handleLocationSuccess);
     this.insert(this.gps);
 
     this.cycle = new Cycle(this.elBoxStats);
 
-    this.toggleListener = this.handleToggle.bind(this);
+    this.toggleListener = this.handleToggle;
     this.btnToggle.addEventListener("click", this.toggleListener);
 
-    this.finishListener = this.handleFinish.bind(this);
+    this.finishListener = this.handleFinish;
     this.btnFinish.addEventListener("click", this.finishListener);
 
-    this.buttonListener = this.handleButton.bind(this);
+    this.buttonListener = this.handleButton;
     document.addEventListener("keypress", this.buttonListener);
   }
 
   onRender() {
     if (exercise && exercise.stats) {
 
-      const speed = formatter.formatSpeed(exercise.stats.speed.current);
+      const speed = utils.formatSpeed(exercise.stats.speed.current);
       this.lblSpeed.text = speed.value;
       this.lblSpeedUnits.text = `speed ${speed.units}`;
 
-      const speedAvg = formatter.formatSpeed(exercise.stats.speed.average);
+      const speedAvg = utils.formatSpeed(exercise.stats.speed.average);
       this.lblSpeedAvg.text = speedAvg.value;
       this.lblSpeedAvgUnits.text = `speed avg ${speedAvg.units}`;
 
-      const speedMax = formatter.formatSpeed(exercise.stats.speed.max);
+      const speedMax = utils.formatSpeed(exercise.stats.speed.max);
       this.lblSpeedMax.text = speedMax.value;
       this.lblSpeedMaxUnits.text = `speed max ${speedMax.units}`;
 
-      const distance = formatter.formatDistance(exercise.stats.distance);
+      const distance = utils.formatDistance(exercise.stats.distance);
       this.lblDistance.text = distance.value;
       this.lblDistanceUnits.text = `distance ${distance.units}`;
 
-      this.lblActiveTime.text = formatter.formatActiveTime(exercise.stats.activeTime);
+      this.lblActiveTime.text = utils.formatActiveTime(exercise.stats.activeTime);
 
-      this.lblCalories.text = formatter.formatCalories(exercise.stats.calories);
+      this.lblCalories.text = utils.formatCalories(exercise.stats.calories);
     }
   }
 

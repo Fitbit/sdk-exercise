@@ -4,7 +4,7 @@
 import { me } from "appbit";
 import { geolocation } from "geolocation";
 
-import { View, $at } from "../modules/view";
+import { View, $at } from "../lib/view";
 
 export default class Gps extends View {
   constructor(parent, callback) {
@@ -29,8 +29,8 @@ export default class Gps extends View {
 
   watch() {
     this.watchId = geolocation.watchPosition(
-      this.handleSuccess.bind(this),
-      this.handleError.bind(this)
+      this.handleSuccess,
+      this.handleError
     );
   }
 
@@ -42,12 +42,12 @@ export default class Gps extends View {
     if (this.iconGps) this.iconGps.style.fill = "fb-red";
   }
 
-  handleSuccess(position) {
+  handleSuccess = (position) => {
     this.gpsGood();
     if (typeof this.callback === "function") this.callback();
   }
 
-  handleError(error) {
+  handleError = (error) => {
     console.log(JSON.stringify(error));
     this.gpsBad();
   }

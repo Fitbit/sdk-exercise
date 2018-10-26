@@ -4,7 +4,7 @@ import { display } from "display";
 import { HeartRateSensor } from "heart-rate";
 import { user } from "user-profile";
 
-import { View, $at } from "../modules/view";
+import { View, $at } from "../lib/view";
 
 export default class Hrm extends View {
   constructor(parent) {
@@ -12,7 +12,7 @@ export default class Hrm extends View {
     this.label = $("#lblHrm");
   }
 
-  eventHandler() {
+  eventHandler = () => {
     if (display.on) {
       this.bodySensor.start();
       this.hrmSensor.start();
@@ -23,7 +23,7 @@ export default class Hrm extends View {
   }
 
   setupEvents() {
-    this.changeListener = this.eventHandler.bind(this);
+    this.changeListener = this.eventHandler;
     display.addEventListener("change", this.changeListener);
     this.eventHandler();
   }
@@ -40,7 +40,7 @@ export default class Hrm extends View {
   }
 
   onMount() {
-    if (me.permissions.granted("access_heart_rate")) {
+    if (me.permissions.granted("access_heart_rate") && me.permissions.granted("access_activity")) {
       this.bodySensor = new BodyPresenceSensor();
       this.hrmSensor = new HeartRateSensor();
       this.setupEvents();
@@ -55,5 +55,7 @@ export default class Hrm extends View {
 
   onUnmount() {
     display.removeEventListener("change", this.changeListener);
+    if (this.hrmSensor) this.hrmSensor.stop();
+    if (this.bodySensor) this.bodySensor.stop();
   }
 }

@@ -1,8 +1,8 @@
 import exercise from "exercise";
 
 import Clock from "../subviews/clock";
-import * as formatter from "../modules/formatter";
-import { View, $at } from "../modules/view";
+import * as utils from "../lib/utils";
+import { View, $at } from "../lib/view";
 
 const $ = $at("#view-end");
 
@@ -27,13 +27,13 @@ export class ViewEnd extends View {
     this.lblHeartRateMax.text = `heart rate max: ${exercise.stats.heartRate
       .max || 0} bpm`;
 
-    const speedAvg = formatter.formatSpeed(exercise.stats.speed.average);
+    const speedAvg = utils.formatSpeed(exercise.stats.speed.average);
     this.lblSpeedAvg.text = `speed avg: ${speedAvg.value} ${speedAvg.units}`;
 
-    const speedMax = formatter.formatSpeed(exercise.stats.speed.max);
-    this.lblSpeedMax.text = `speed avg: ${speedMax.value} ${speedMax.units}`;
+    const speedMax = utils.formatSpeed(exercise.stats.speed.max);
+    this.lblSpeedMax.text = `speed max: ${speedMax.value} ${speedMax.units}`;
 
-    const distance = formatter.formatDistance(exercise.stats.distance);
+    const distance = utils.formatDistance(exercise.stats.distance);
     this.lblDistance.text = `distance: ${distance.value} ${distance.units}`;
   }
 
