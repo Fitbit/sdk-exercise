@@ -20,7 +20,9 @@ export class ViewEnd extends View {
     this.clock = new Clock("#subview-clock2", "seconds");
     this.insert(this.clock);
 
-    this.lblActiveTime.text = `active time: ${exercise.stats.activeTime}`;
+    this.lblActiveTime.text = `active time: ${utils.formatActiveTime(
+      exercise.stats.activeTime
+    )}`;
 
     this.lblHeartRateAvg.text = `heart rate avg: ${exercise.stats.heartRate
       .average || 0} bpm`;
