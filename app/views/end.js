@@ -21,7 +21,7 @@ export class ViewEnd extends View {
     this.insert(this.clock);
 
     this.lblActiveTime.text = `active time: ${utils.formatActiveTime(
-      exercise.stats.activeTime
+      exercise.stats.activeTime || 0
     )}`;
 
     this.lblHeartRateAvg.text = `heart rate avg: ${exercise.stats.heartRate
@@ -29,13 +29,13 @@ export class ViewEnd extends View {
     this.lblHeartRateMax.text = `heart rate max: ${exercise.stats.heartRate
       .max || 0} bpm`;
 
-    const speedAvg = utils.formatSpeed(exercise.stats.speed.average);
+    const speedAvg = utils.formatSpeed(exercise.stats.speedAvg || 0);
     this.lblSpeedAvg.text = `speed avg: ${speedAvg.value} ${speedAvg.units}`;
 
-    const speedMax = utils.formatSpeed(exercise.stats.speed.max);
+    const speedMax = utils.formatSpeed(exercise.stats.speedMax || 0);
     this.lblSpeedMax.text = `speed max: ${speedMax.value} ${speedMax.units}`;
 
-    const distance = utils.formatDistance(exercise.stats.distance);
+    const distance = utils.formatDistance(exercise.stats.distance || 0);
     this.lblDistance.text = `distance: ${distance.value} ${distance.units}`;
   }
 

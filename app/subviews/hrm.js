@@ -8,10 +8,8 @@ import { View, $at } from "../lib/view";
 
 export default class HRM extends View {
   constructor(parent) {
-    if (!parent) {
-      console.warn("HRM parent element is undefined");
-      return;
-    };
+    if (!parent) throw new Error("HRM parent element is undefined");
+
     const $ = $at(parent);
     this.label = $("#lblHrm");
   }

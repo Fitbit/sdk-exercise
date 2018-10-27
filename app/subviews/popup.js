@@ -3,10 +3,8 @@ import { View, $at, $ as x$ } from "../lib/view";
 
 export default class Popup extends View {
   constructor(parent, settings = {}) {
-    if (!parent) {
-      console.warn("Popup parent element is undefined");
-      return;
-    }
+    if (!parent) throw new Error("Popup parent element is undefined");
+
     this.parent = x$(parent);
 
     const $ = $at(parent);

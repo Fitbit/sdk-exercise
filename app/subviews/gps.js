@@ -8,10 +8,8 @@ import { View, $at } from "../lib/view";
 
 export default class GPS extends View {
   constructor(parent, callback) {
-    if (!parent) {
-      console.warn("GPS parent element is undefined");
-      return;
-    };
+    if (!parent) throw new Error("GPS parent element is undefined");
+
     const $ = $at(parent);
     this.iconGps = $("#icon-gps");
     this.callback = callback;

@@ -9,10 +9,8 @@ import { View, $at } from "../lib/view";
 
 export default class Clock extends View {
   constructor(parent, granularity, callback) {
-    if (!parent) {
-      console.warn("Clock parent element is undefined");
-      return;
-    };
+    if (!parent) throw new Error("Clock parent element is undefined");
+
     const $ = $at(parent);
     this.lblClock = $("#lblClock");
     clock.granularity = granularity || "seconds";
