@@ -4,10 +4,7 @@ export default class Cycle {
   index = 0;
 
   constructor(container) {
-    if (!container) {
-      console.warn("Cycle parent element is undefined");
-      return;
-    };
+    if (!container) throw new Error("Cycle parent element is undefined");
 
     this.container = container;
     this.items = this.container.getElementsByClassName("item");
