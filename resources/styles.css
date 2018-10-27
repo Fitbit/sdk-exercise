@@ -1,0 +1,47 @@
+text {
+  font-family: System-Regular;
+  font-size: 30;
+  font-weight: bold;
+  text-anchor: start;
+  fill: white;
+}
+
+#icon-gps {
+  href: "images/icons/icn_status_gps.png";
+  x: 8;
+  y: 8;
+  width: 32;
+  height: 32;
+  fill: "fb-orange";
+}
+
+#lblClock {
+  x: 50%;
+  y: 32;
+  font-size: 28;
+  text-length: 8;
+  text-anchor: middle;
+}
+
+.bignumber {
+  font-size: 120;
+  font-family: System-Light;
+  fill: fb-yellow;
+  x: -4;
+  y: 84;
+  text-length: 20;
+}
+
+.label {
+  font-size: 30;
+  fill: fb-yellow;
+  text-length: 66;
+}
+
+.item .label {
+  y: $-80;
+}
+
+#subview-hrm .label {
+  y: $-80;
+}
