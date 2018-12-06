@@ -25,4 +25,4 @@ There are 3 main screens (/app/views) in the application:
 
 ### Screenshot
 
-![screenshot](screenshot.gif)
+![screenshot](screenshots/versa-1.png) ![screenshot](screenshots/versa-2.png) ![screenshot](screenshots/versa-3.png) ![screenshot](screenshots/versa-4.png) ![screenshot](screenshots/versa-5.png)
