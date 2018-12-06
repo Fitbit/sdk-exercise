@@ -1,4 +1,4 @@
-export const exerciseName = "Skateboarding";
+export const exerciseName = "Skateboard";
 
 export const exerciseOptions = {
   gps: true

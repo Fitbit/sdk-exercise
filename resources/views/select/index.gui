@@ -2,8 +2,6 @@
 <svg id="view-select" display="none">
   <image href="images/bg.png" />
 
-  <use id="subview-gps1" href="#subview-gps" />
-
   <text id="lblTitle">Exercise Name</text>
 
   <use id="btnStart" href="#combo-button-lower-right" fill="fb-yellow" shortcut="none">

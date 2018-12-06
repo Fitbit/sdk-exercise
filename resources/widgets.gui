@@ -28,13 +28,13 @@
 
       <!-- Left button -->
       <use id="btnLeft" class="dialog-half-button-left" href="#square-button-neutral">
-        <set href="#text" attributeName="text-buffer" to="Later" />
+        <set href="#text" attributeName="text-buffer" to="XXXXXX" />
         <set href="#text" attributeName="text-anchor" to="middle" />
       </use>
 
       <!-- Right button -->
       <use id="btnRight" class="dialog-half-button-right" href="#square-button-negative">
-        <set href="#text" attributeName="text-buffer" to="Start" />
+        <set href="#text" attributeName="text-buffer" to="XXXXXX" />
         <set href="#text" attributeName="text-anchor" to="middle" />
       </use>
     </symbol>
