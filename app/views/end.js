@@ -29,10 +29,10 @@ export class ViewEnd extends View {
     this.lblHeartRateMax.text = `heart rate max: ${exercise.stats.heartRate
       .max || 0} bpm`;
 
-    const speedAvg = utils.formatSpeed(exercise.stats.speedAvg || 0);
+    const speedAvg = utils.formatSpeed(exercise.stats.speed.average || 0);
     this.lblSpeedAvg.text = `speed avg: ${speedAvg.value} ${speedAvg.units}`;
 
-    const speedMax = utils.formatSpeed(exercise.stats.speedMax || 0);
+    const speedMax = utils.formatSpeed(exercise.stats.speed.max || 0);
     this.lblSpeedMax.text = `speed max: ${speedMax.value} ${speedMax.units}`;
 
     const distance = utils.formatDistance(exercise.stats.distance || 0);
